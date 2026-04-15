@@ -30,7 +30,7 @@
   --dim:#2a4060;
   --font:"Oxanium",sans-serif;
   --mono:"DM Mono",monospace;
-  --sidebar-w:290px;
+  --sidebar-w:310px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -64,10 +64,10 @@ body::before{
   display:grid;
   grid-template-columns:var(--sidebar-w) 1fr;
   min-height:100vh;
-  max-width:1140px;
-  margin:0 auto;
+  width:100%;
   position:relative;z-index:1;
-  box-shadow:0 0 80px rgba(0,229,255,.05);
+  box-shadow:none;
+  align-items:start;
 }
 
 /* ─── SIDEBAR ─── */
@@ -76,8 +76,8 @@ body::before{
   border-right:1px solid var(--border);
   padding:40px 24px 52px;
   display:flex;flex-direction:column;gap:30px;
-  position:sticky;top:0;height:100vh;overflow-y:auto;
-  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+  position:relative;
+  min-height:100vh;
   animation:fadeIn .5s ease both;
 }
 .sidebar::before{
@@ -161,7 +161,7 @@ body::before{
 /* ─── MAIN ─── */
 .main{
   background:var(--bg);
-  padding:44px 42px 70px;
+  padding:48px 56px 80px;
   display:flex;flex-direction:column;gap:36px;
   animation:fadeIn .5s .1s ease both;
   min-width:0;
@@ -313,11 +313,77 @@ h1 .sur{display:block;font-size:24px;color:var(--dim);letter-spacing:.06em;}
 }
 
 /* ── PRINT ── */
+
+@media(min-width:1440px){
+  :root{--sidebar-w:340px;}
+  body{font-size:16px;}
+  h1{font-size:48px;}
+  h1 .sur{font-size:26px;}
+  .main{padding:52px 72px 90px;}
+  .sidebar{padding:44px 28px 56px;}
+  .stat-row{grid-template-columns:repeat(5,1fr);}
+}
+@media(min-width:1920px){
+  :root{--sidebar-w:380px;}
+  body{font-size:17px;}
+  h1{font-size:54px;}
+  .main{padding:56px 90px 100px;}
+}
+
 @media print{
   body{background:#fff;color:#111;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .cv-wrap{grid-template-columns:1fr;box-shadow:none;}
   .sidebar{display:none;}
 }
+
+/* ── DOWNLOAD BUTTON ── */
+.dl-wrap{
+  display:flex;align-items:center;gap:12px;
+  margin-top:18px;flex-wrap:wrap;
+}
+.btn-dl{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:11px 22px;
+  background:linear-gradient(135deg,var(--glow),var(--glow2));
+  border:none;border-radius:6px;
+  font-family:var(--font);font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:#060b14;text-decoration:none;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .2s, box-shadow .2s;
+  box-shadow:0 0 20px rgba(0,229,255,.25);
+}
+.btn-dl:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 32px rgba(0,229,255,.45),0 0 60px rgba(0,255,157,.15);
+}
+.btn-dl::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+  opacity:0;transition:.2s;
+}
+.btn-dl:hover::before{opacity:1;}
+.btn-dl .dl-icon{font-size:16px;animation:floatDot 2s ease-in-out infinite;}
+.btn-dl .dl-text{display:flex;flex-direction:column;gap:1px;text-align:left;}
+.btn-dl .dl-main{font-size:12px;font-weight:800;line-height:1;}
+.btn-dl .dl-sub{font-size:9px;font-weight:500;opacity:.85;letter-spacing:.08em;}
+.btn-view{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;
+  background:transparent;
+  border:1px solid rgba(0,229,255,.35);border-radius:6px;
+  font-family:var(--font);font-size:11px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--glow);text-decoration:none;
+  cursor:pointer;transition:.2s;
+}
+.btn-view:hover{
+  background:rgba(0,229,255,.08);
+  border-color:var(--glow);
+  transform:translateY(-2px);
+}
+@media(max-width:720px){.dl-wrap{flex-direction:column;align-items:flex-start;}}
+
 </style>
 </head>
 <body>
@@ -441,6 +507,18 @@ h1 .sur{display:block;font-size:24px;color:var(--dim);letter-spacing:.06em;}
       <span class="badge bp">Big Data</span>
       <span class="badge bo">n8n · AI Agents</span>
       <span class="badge bc">PhD en proceso</span>
+    </div>
+    <div class="dl-wrap">
+      <a class="btn-dl" href="/CV-IMHR-2026-CARTA-1HOJA.pdf" download="CV-Isaac-Hernandez-2026.pdf">
+        <span class="dl-icon">⬇</span>
+        <span class="dl-text">
+          <span class="dl-main">Descargar CV</span>
+          <span class="dl-sub">PDF · 1 Hoja · Carta</span>
+        </span>
+      </a>
+      <a class="btn-view" href="/CV-IMHR-2026-CARTA-1HOJA.pdf" target="_blank">
+        <span>👁</span> Vista previa
+      </a>
     </div>
   </div>
 
