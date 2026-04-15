@@ -10,3 +10,8 @@ Data Analyst → Data Scientist | PhD Candidate | Educator
 
 ## Deploy
 Conectado a Vercel → iheratech.com
+
+## Tests
+- Instalar dependencias: `npm install`
+- Instalar navegadores (solo primera vez): `npx playwright install`
+- Ejecutar suite: `npm test`
